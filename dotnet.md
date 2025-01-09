@@ -73,7 +73,35 @@ the Id will be automatically created by entityFramework, so from the form we wan
 entity Student will be used n ApplicationDbContext
 how to use - by creating a property - DbSet<> - is repsresenting a collection of a particular type. here type is Students
 
- public DbSet<Student> Students { get; set; } - we can use this property to play around with students table yhat has been created or will be created in sql server.
+ public DbSet<Student> Students { get; set; } - we can use this property to play around with students table yhat has been created or will be created soon in sql server db.
 
- 
+we want to inject this DbContext into our application using dependecy injection and later on beacuase we have injected this class into our app we should be able to use this inside our controllers and basically access the tables of the db we are about to create.
+
+step - inject the ApplicationDbContext inside our app
+Program.cs
+
+below builder.Services
+//inject DbContext - it tells which db and table we are about to create
+//UseSqlServer - takes connection string of type string
+//appsettings.json - 
+add "ConnectionStrings": {
+  "StudentPortal": "Server=DESKTOP-5EVKAPH\\SQLEXPRESS;Database=StudentPortalDb;Trusted_Connection=True;TrustServerCertificate=True"
+}
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("StudentPortal")));
+- UseSqlServer () takes a string - a keyname which we have defined in appsettings.json - conncetionStrings - StudentPortal - exact sanme name required
+
+- here we are injecting our ApplicationDbContext and we are telling the application for this context plz use sql-server database and this is the connection string to this particular server and database.
+
+- 
+run entity core migration to create table  -
+package manager - tools - Nuget package manager - package manager console
+PM >
+//create migration
+Add-Migration "Initial Migration"
+- creates a folder migrations - hash - initial-migration.cs
+- two methods - up() and down()
+- Up - create table - taking all this info from ApplicationDbContext
+- so we are telling Entity frmewokr core to create a DbSet which is a table in 
+//
+
  
