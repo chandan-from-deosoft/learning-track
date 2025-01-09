@@ -101,7 +101,13 @@ Add-Migration "Initial Migration"
 - creates a folder migrations - hash - initial-migration.cs
 - two methods - up() and down()
 - Up - create table - taking all this info from ApplicationDbContext
-- so we are telling Entity frmewokr core to create a DbSet which is a table in 
-//
+- so we are telling Entity frmewokr core to create a DbSet which is a table in terms of sql server
+we are telling it to create a new table called student with properties as defined in Student.cs
+- at this moment we only have created a class file, nothing has been create in sql server db.
+- cmd for look for migration file generated and alos at database. if it is able to  find the db, it will execute what is not executed yet and it will sync up db with the project.
+
+- if db is existing basically it is already sync it up
+- refresh db - check table created
+- PM > Update-Database 
 
  
