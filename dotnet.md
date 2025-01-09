@@ -110,4 +110,10 @@ we are telling it to create a new table called student with properties as define
 - refresh db - check table created
 - PM > Update-Database 
 
- 
+ so we have used EntityFramework core to do all heavy lifting for us -
+
+Next - create a new controller and some views for ourselves, so that we can start focusing on the crud operations and make use of DbContext file to do all crud operations for us.
+
+- add new controller - empty controller - StudentsConrtoller - method - Add() - [HttpGet]
+-  right click on view - add view - empty razor - add.cshtml
+-  use bootstrap to create 
