@@ -203,3 +203,15 @@ RedirectToAction("List", "Students"); - redirect the user to the "List" action o
 </td>
 
 //delete operation
+
+```
+An unhandled exception occurred while processing the request.
+InvalidOperationException: The instance of entity type 'Student' cannot be tracked because another instance with the same key value for {'Id'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+Microsoft.EntityFrameworkCore.ChangeTracking.Internal.IdentityMap<TKey>.ThrowIdentityConflict(InternalEntityEntry entry)
+```
+exception generated - becuse EntityFrameworkCore code tracking the entity behind the scene and we are unable to remove bcws its tracking
+solution - 2 ways
+- await dbContext.Students
+  .AsNoTracking() //disable tracking
+  .FirstOrDefaultAsync(x => x.Id == viewModel.Id);
+
