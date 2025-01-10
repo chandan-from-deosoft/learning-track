@@ -166,3 +166,40 @@ on top specify the model we are using - @model List<StudentPortal.Web.Models.Ent
 //as List view is ready return view and  pass collection to view
 return View(students);
 
+
+//update fields -
+create HttpGet Edit() - show details of one particular student using id
+```
+    [HttpGet]
+    public async Task<IActionResult> Edit(Guid id)
+    {
+        var student = await dbContext.Students.FindAsync(id);
+
+        return View(student);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(Student viewModel)
+    {
+        var student = await dbContext.Students.FindAsync(viewModel.Id);
+
+        if (student is not null)
+        {
+            student.Name = viewModel.Name;
+            student.Email = viewModel.Email;
+            student.Phone = viewModel.Phone;
+            student.Subscribed = viewModel.Subscribed;
+
+            await dbContext.SaveChangesAsync();
+        }
+
+        return RedirectToAction("List", "Students");
+    }
+}
+```
+RedirectToAction("List", "Students"); - redirect the user to the "List" action of the "Students" controller after executing the logic
+<td>
+    <a class="btn btn-primary" asp-controller="Students" asp-action="Edit" asp-route-Id="@student.Id">Edit</a>
+</td>
+
+//delete operation
