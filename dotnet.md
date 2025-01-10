@@ -134,3 +134,20 @@ get the add.cshtml field data in HttpPost method by using a parameter - (AddStud
 
 we need to add a form to encapsulate all html field data and submit on save btn click.
 add breakpoint in httpPost method and run in debig mode and verify params carry input fields submitted.
+
+Now using DbContext and EntityFramework core we can save the info in db.
+step -
+    inject Dbcontext class inside the controller - for that we use constructor injection
+    - creata constructor and inject AppliactionDbContext
+    public StudentController(AppliactionDbContext dbContext)
+    and press cntl+ (.) - create and assign field - dbContext 
+        - private readonly AppliactionDbContext dbContext
+        - this.dbContext = dbContext
+    we will be able to use this field dbContext -we don't have to knew it uo bcws dependency injection is taking care of instances
+    make HttpPost() async and inside it - await on dbContext.properties of dbContext (Students table).AddAsync(student entity)
+    - create student entity before await method - 
+    ```
+    var student = new Student { Name = viewModel.Name, Email = viewModel.Email, Phone = viewModel.Phone, Subscribed = viewModel.Subscribed }
+    await dbContext.Students.AddAsync(student)
+    await dbContext.SaveChangesAsync(); //save 
+    ```
