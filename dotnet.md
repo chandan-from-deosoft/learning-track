@@ -150,4 +150,19 @@ step -
     var student = new Student { Name = viewModel.Name, Email = viewModel.Email, Phone = viewModel.Phone, Subscribed = viewModel.Subscribed }
     await dbContext.Students.AddAsync(student)
     await dbContext.SaveChangesAsync(); //save 
-    ```
+```
+create - portion completed.
+Display  - retrieve list of all students -
+use dbContext -> var students = dbContext.Students.ToListAsync();
+Now , we need to pass this students model in view. So create a view for list. raxor view - empty page - view.cshtml
+ List.cshtml -
+create table - for showing students record using table
+extra button  action button
+
+table body - foreach(var  item in collection) - model List is used as collection as it holds list of students
+
+on top specify the model we are using - @model List<StudentPortal.Web.Models.Entities.Student> -- model is a list of student
+
+//as List view is ready return view and  pass collection to view
+return View(students);
+
