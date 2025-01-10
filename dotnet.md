@@ -58,6 +58,7 @@ models - create a model -folder - Entities
 an entity is an class that has an identity. i.e. any class that has a unique id or identity
 
 create new class - inside entities - Student.cs
+```
 public class Student {
 
   public Guid Id {get; set;}
@@ -68,6 +69,7 @@ public class Student {
  public string Phone { get; set; }
  public bool Subscribed { get; set; }  
 }
+```
 the Id will be automatically created by entityFramework, so from the form we want to capture the name, Email, Phone, Subscribed
 
 entity Student will be used n ApplicationDbContext
@@ -117,3 +119,18 @@ Next - create a new controller and some views for ourselves, so that we can star
 - add new controller - empty controller - StudentsConrtoller - method - Add() - [HttpGet]
 -  right click on view - add view - empty razor - add.cshtml
 -  use bootstrap to create 
+- create html forms for student table fields - add.cshtml
+- in StudentsController - we need to implement- HttpPost method for recording the add student in db.
+- SO we use view model - we will bind view model to input elements just above the form, when the save button is hit or submitted we will get the info i.e. the whole view model in StudentController - HttpPost method.
+- Add class in models folder - AddStudentViewModel.cs - this will have 4 metohds - name, email, phone subscribed
+- in add.cshtml bind view model -
+```
+  //@model [fully qualified name of view model]
+@model StudentsPortal.Web.Models.AddStudentViewModel
+```
+- add asp-for="" in html element - press ctrl+space - suggestion - viewModel fields properties - Name, Phone, Email, Subscribed 
+get the add.cshtml field data in HttpPost method by using a parameter - (AddStudentViewModel viewModel)
+
+
+we need to add a form to encapsulate all html field data and submit on save btn click.
+add breakpoint in httpPost method and run in debig mode and verify params carry input fields submitted.
